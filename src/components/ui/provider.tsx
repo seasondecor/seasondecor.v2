@@ -6,8 +6,17 @@ import theme from "@/theme";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
+import { SessionProvider } from "next-auth/react";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 export function Provider(props: ColorModeProviderProps) {
   const [hydrated, setHydrated] = useState<boolean>(false);
 
@@ -22,11 +31,13 @@ export function Provider(props: ColorModeProviderProps) {
   }
 
   return (
-    <ChakraProvider value={theme}>
-      <QueryClientProvider client={queryClient}>
-        <ColorModeProvider {...props} forcedTheme="dark" />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </ChakraProvider>
+    <SessionProvider refetchOnWindowFocus={false}>
+      <ChakraProvider value={theme}>
+        <QueryClientProvider client={queryClient}>
+          <ColorModeProvider {...props} forcedTheme="dark" />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </ChakraProvider>
+    </SessionProvider>
   );
 }

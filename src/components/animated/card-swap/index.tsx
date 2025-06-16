@@ -75,7 +75,7 @@ const placeNow = (el: HTMLElement, slot: Slot, skew: number) =>
     force3D: true,
   });
 
-const CardSwap: React.FC<CardSwapProps> = ({
+export const CardSwap: React.FC<CardSwapProps> = ({
   width,
   height,
   cardDistance = 60,
@@ -243,5 +243,3 @@ const CardSwap: React.FC<CardSwapProps> = ({
     </div>
   );
 };
-
-export default CardSwap;

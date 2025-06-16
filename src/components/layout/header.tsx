@@ -8,7 +8,7 @@ import {
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
-} from "@/components/animated/resizeable-navbar";
+} from "@/components/animated";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {

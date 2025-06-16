@@ -13,7 +13,7 @@ interface CountUpProps {
   onEnd?: () => void;
 }
 
-export default function CountUp({
+export const CountUp: React.FC<CountUpProps> = ({
   to,
   from = 0,
   direction = "up",
@@ -24,7 +24,7 @@ export default function CountUp({
   separator = "",
   onStart,
   onEnd,
-}: CountUpProps) {
+}: CountUpProps) => {
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(direction === "down" ? to : from);
 
@@ -54,14 +54,11 @@ export default function CountUp({
         motionValue.set(direction === "down" ? from : to);
       }, delay * 1000);
 
-      const durationTimeoutId = setTimeout(
-        () => {
-          if (typeof onEnd === "function") {
-            onEnd();
-          }
-        },
-        delay * 1000 + duration * 1000
-      );
+      const durationTimeoutId = setTimeout(() => {
+        if (typeof onEnd === "function") {
+          onEnd();
+        }
+      }, delay * 1000 + duration * 1000);
 
       return () => {
         clearTimeout(timeoutId);
@@ -104,4 +101,4 @@ export default function CountUp({
   }, [springValue, separator]);
 
   return <span className={`${className}`} ref={ref} />;
-}
+};

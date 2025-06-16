@@ -17,9 +17,10 @@ import {
 } from "@chakra-ui/react";
 import { useGetListProduct } from "@/queries/product";
 import { Product } from "@/types";
-import GlareHover from "@/components/animated/glare-hover";
-import { Vortex } from "@/components/animated/vortex";
+import { GlareHover } from "@/components/animated";
+import { Vortex } from "@/components/animated";
 import { IconShoppingCartPlus } from "@tabler/icons-react";
+import { FadeContent } from "@/components/animated";
 
 export default function ShopPage() {
   const { data: productsData, isFetching } = useGetListProduct();
@@ -45,7 +46,7 @@ export default function ShopPage() {
     <Box as="main" className="relative" mt="-80px">
       <Vortex
         className="h-[100vh] w-full"
-        containerClassName="bg-gradient-to-b from-black to-transparent"
+        containerClassName="inset-x-0 bg-gradient-to-b from-black opacity-90 to-transparent"
         particleCount={500}
         baseHue={200}
         baseSpeed={0.2}
@@ -61,23 +62,31 @@ export default function ShopPage() {
           alignItems="center"
           justifyContent="center"
         >
-          <Heading
-            as="h1"
-            size={{ base: "5xl", md: "6xl", lg: "7xl" }}
-            color="white"
-            textAlign="center"
-            className="text-shadow-lg"
+          <FadeContent
+            blur={true}
+            duration={1000}
+            easing="ease-out"
+            initialOpacity={0}
           >
-            Discover Our Collection
-          </Heading>
-          <Text
-            fontSize={{ base: "xl", md: "lg" }}
-            color="whiteAlpha.800"
-            mt={4}
-            textAlign="center"
-          >
-            Explore a wide range of products designed to elevate your space.
-          </Text>
+            <Heading
+              as="h1"
+              size={{ base: "5xl", md: "6xl", lg: "7xl" }}
+              color="white"
+              textAlign="center"
+              className="text-shadow-lg"
+            >
+              Discover Our Collection
+            </Heading>
+            <Text
+              fontSize={{ base: "xl", md: "lg" }}
+              color="whiteAlpha.800"
+              mt={4}
+              textAlign="center"
+            >
+              Handpicked products crafted with care to transform your living and
+              working spaces.
+            </Text>
+          </FadeContent>
         </Flex>
       </Vortex>
 
@@ -85,72 +94,83 @@ export default function ShopPage() {
         <Heading as="h2" size="xl" mb={8} textAlign="center">
           Our Products
         </Heading>
-
-        <SimpleGrid columns={{ base: 1, sm: 1, md: 3, lg: 4 }} gap={6}>
-          {isFetching
-            ? // Show 8 skeleton cards while loading
-              Array(8)
-                .fill(0)
-                .map((_, index) => <ProductSkeleton key={index} />)
-            : products.map((product) => (
-                <GlareHover
-                  key={product.id}
-                  glareColor="#ffffff"
-                  glareOpacity={0.7}
-                  glareAngle={-30}
-                  glareSize={400}
-                  transitionDuration={1000}
-                  playOnce={false}
-                  className="group"
-                >
-                  <Card.Root
-                    maxW={{ base: "full", sm: "sm" }}
-                    overflow="hidden"
-                    rounded="lg"
-                    cursor="pointer"
-                    boxShadow="md"
-                    transition="all 0.3s ease"
-                    _hover={{
-                      transform: "translateY(-4px)",
-                      boxShadow: "lg",
-                    }}
+        <FadeContent
+          blur={true}
+          duration={1000}
+          easing="ease-out"
+          initialOpacity={0}
+        >
+          <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} gap={6}>
+            {isFetching
+              ? // Show 8 skeleton cards while loading
+                Array(8)
+                  .fill(0)
+                  .map((_, index) => <ProductSkeleton key={index} />)
+              : products.map((product) => (
+                  <GlareHover
+                    key={product.id}
+                    glareColor="#ffffff"
+                    glareOpacity={0.7}
+                    glareAngle={-30}
+                    glareSize={400}
+                    transitionDuration={1000}
+                    playOnce={false}
+                    className="group"
                   >
-                    <Image
-                      src={product.imageUrls?.[0] || "/fav-icon.svg"}
-                      alt={product.productName || "Product image"}
-                      fit="cover"
-                      roundedTop="lg"
-                      transition="transform 0.3s ease-in-out"
-                      aspectRatio={4 / 3}
-                      _groupHover={{ transform: "scale(1.05)" }}
-                    />
-                    <Card.Body gap="2">
-                      <Card.Title fontSize={{ base: "sm", lg: "lg" }}>
-                        {product.productName}
-                      </Card.Title>
-                      <Text
-                        fontSize={{ base: "lg", sm: "xl" }}
-                        fontWeight="medium"
-                        letterSpacing="tight"
-                        mt="2"
-                      >
-                        <FormatNumber
-                          value={product.productPrice}
-                          style="currency"
-                          currency="VND"
-                        />
-                      </Text>
-                    </Card.Body>
-                    <Card.Footer gap="2">
-                      <Button variant="outline" colorPalette="blue">
-                        <IconShoppingCartPlus />
-                        Buy now
-                      </Button>
-                    </Card.Footer>
-                  </Card.Root>
-                </GlareHover>
-              ))}
-        </SimpleGrid>
+                    <Card.Root
+                      maxW={{ base: "full", sm: "sm" }}
+                      h="full"
+                      overflow="hidden"
+                      rounded="lg"
+                      cursor="pointer"
+                      boxShadow="md"
+                      transition="all 0.3s ease"
+                      _hover={{
+                        transform: "translateY(-4px)",
+                        boxShadow: "lg",
+                      }}
+                    >
+                      <Image
+                        src={product.imageUrls?.[0] || "/fav-icon.svg"}
+                        alt={product.productName || "Product image"}
+                        fit="cover"
+                        roundedTop="lg"
+                        transition="transform 0.3s ease-in-out"
+                        aspectRatio={4 / 3}
+                        _groupHover={{ transform: "scale(1.05)" }}
+                      />
+                      <Card.Body gap="2">
+                        <Card.Title
+                          fontSize={{ base: "sm", lg: "lg" }}
+                          lineHeight="1.75rem"
+                          lineClamp="2"
+                        >
+                          {product.productName}
+                        </Card.Title>
+                        <Text
+                          fontSize={{ base: "lg", sm: "xl" }}
+                          fontWeight="medium"
+                          letterSpacing="tight"
+                          mt="2"
+                        >
+                          <FormatNumber
+                            value={product.productPrice}
+                            style="currency"
+                            currency="VND"
+                          />
+                        </Text>
+                      </Card.Body>
+                      <Card.Footer gap="2">
+                        <Button variant="outline" colorPalette="blue">
+                          <IconShoppingCartPlus />
+                          Buy now
+                        </Button>
+                      </Card.Footer>
+                    </Card.Root>
+                  </GlareHover>
+                ))}
+          </SimpleGrid>
+        </FadeContent>
       </Container>
     </Box>
   );

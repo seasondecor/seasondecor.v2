@@ -8,9 +8,9 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "motion/react";
-import Logo from "../layout/logo";
+import Logo from "@/components/layout/logo";
 import { Flex, Heading, Box, Link as ChakraLink } from "@chakra-ui/react";
-import { useColorModeValue } from "../ui/color-mode";
+import { useColorModeValue } from "@/components/ui/color-mode";
 import Link from "next/link";
 
 interface NavbarProps {
