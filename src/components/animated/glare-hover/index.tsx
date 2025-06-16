@@ -1,11 +1,6 @@
 import React, { useRef } from "react";
 
 interface GlareHoverProps {
-  width?: string;
-  height?: string;
-  background?: string;
-  borderRadius?: string;
-  borderColor?: string;
   children?: React.ReactNode;
   glareColor?: string;
   glareOpacity?: number;
@@ -17,12 +12,7 @@ interface GlareHoverProps {
   style?: React.CSSProperties;
 }
 
-const GlareHover: React.FC<GlareHoverProps> = ({
-  width,
-  height,
-  background = "transparent",
-  borderRadius = "10px",
-  borderColor = "transparent",
+export const GlareHover: React.FC<GlareHoverProps> = ({
   children,
   glareColor = "#ffffff",
   glareOpacity = 0.2,
@@ -90,13 +80,8 @@ const GlareHover: React.FC<GlareHoverProps> = ({
 
   return (
     <div
-      className={`relative grid place-items-center overflow-hidden border ${className}`}
+      className={`relative ${className}`}
       style={{
-        width,
-        height,
-        background,
-        borderRadius,
-        borderColor,
         ...style,
       }}
       onMouseEnter={animateIn}
@@ -108,4 +93,3 @@ const GlareHover: React.FC<GlareHoverProps> = ({
   );
 };
 
-export default GlareHover;

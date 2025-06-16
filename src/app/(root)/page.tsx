@@ -15,7 +15,7 @@ import {
   Icon,
   Image,
 } from "@chakra-ui/react";
-import CardSwap, { Card } from "@/components/animated/card-swap";
+import { CardSwap, Card } from "@/components/animated";
 import {
   IconListSearch,
   IconAdjustments,
@@ -26,13 +26,14 @@ import {
   IconPointFilled,
   IconPhoneRinging,
   IconHeartbeat,
+  IconWorldSearch,
 } from "@tabler/icons-react";
-import CountUp from "@/components/animated/count-up";
+import { CountUp } from "@/components/animated";
 import dynamic from "next/dynamic";
 import FeaturesSection from "./_components/features-section";
 
 export default function Home() {
-  const NoSSR = dynamic(() => import("@/components/animated/beams-bg"), {
+  const NoSSR = dynamic(() => import("@/components/animated").then((mod) => mod.BeamsBg), {
     ssr: false,
   });
   return (
@@ -308,14 +309,17 @@ export default function Home() {
                   delay={4000}
                   pauseOnHover={true}
                 >
-                  <Card className="p-6 bg-gradient-to-br from-purple-900 to-blue-900 text-white flex flex-col justify-between">
-                    <Box>
+                  <Card className="p-6 bg-[#1A1A1A] text-white flex flex-col justify-between">
+                    <HStack>
+                      <Icon size="lg">
+                        <IconWorldSearch />
+                      </Icon>
                       <Heading size="md" py={2} px={2}>
-                        Meet enthusiastic decorators
+                        Reliable
                       </Heading>
-                    </Box>
+                    </HStack>
                     <Text color="gray.300" px={2} pb={1}>
-                      Find your perfect match with our professional
+                      Find your perfect match base on your preferences
                     </Text>
                     <Image
                       src="/hero-vid-1.gif"
@@ -328,16 +332,18 @@ export default function Home() {
                     />
                   </Card>
 
-                  <Card className="p-6 bg-gradient-to-br from-blue-900 to-cyan-900 text-white flex flex-col justify-between">
-                    <Box>
+                  <Card className="p-6 bg-[#1A1A1A] text-white flex flex-col justify-between">
+                    <HStack>
+                      <Icon size="lg">
+                        <IconPointFilled />
+                      </Icon>
                       <Heading size="md" py={2} px={2}>
-                        Bring your ideas to your space
+                        Customizable
                       </Heading>
-                      <Text color="gray.300" px={2} pb={1}>
-                        Free to share your customization ideas with our
-                        providers.
-                      </Text>
-                    </Box>
+                    </HStack>
+                    <Text color="gray.300" px={2} pb={1}>
+                      Free to share your customization ideas with our providers.
+                    </Text>
                     <Image
                       src="/hero-vid-2.gif"
                       alt="hero-vid-2"
@@ -349,16 +355,19 @@ export default function Home() {
                     />
                   </Card>
 
-                  <Card className="p-6 bg-gradient-to-br from-indigo-900 to-purple-900 text-white flex flex-col justify-between">
-                    <Box>
+                  <Card className="p-6 bg-[#1A1A1A] text-white flex flex-col justify-between">
+                    <HStack>
+                      <Icon size="lg">
+                        <IconAdjustments />
+                      </Icon>
                       <Heading size="md" py={2} px={2}>
-                        Easy to communicate with providers
+                        Easy to communicate
                       </Heading>
-                      <Text color="gray.300" px={2} pb={1}>
-                        Communicate with your favorite providers through our
-                        platform.
-                      </Text>
-                    </Box>
+                    </HStack>
+                    <Text color="gray.300" px={2} pb={1}>
+                      Communicate with your favorite providers through our
+                      platform.
+                    </Text>
                     <Image
                       src="/hero-vid-3.gif"
                       alt="hero-vid-2"
