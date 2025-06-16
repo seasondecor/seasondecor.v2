@@ -1,8 +1,9 @@
-"use client"
+"use client";
 
 import React, { useRef, useEffect, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
+import { Box } from "@chakra-ui/react";
 
 gsap.registerPlugin(InertiaPlugin);
 
@@ -283,17 +284,51 @@ const DotGrid: React.FC<DotGridProps> = ({
   ]);
 
   return (
-    <section
-      className={`flex items-center justify-center h-full w-full relative ${className}`}
+    <Box
+      as="section"
+      position="relative"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      height="100%"
+      width="100%"
+      className={className} // Keep this only if you pass extra Tailwind classes
       style={style}
     >
-      <div ref={wrapperRef} className="w-full h-full relative">
-        <canvas
+      <Box ref={wrapperRef} position="relative" width="100%" height="100%">
+        <Box
+          as="canvas"
           ref={canvasRef}
-          className="absolute inset-0 w-full h-full pointer-events-none"
+          position="absolute"
+          inset={0}
+          width="100%"
+          height="100%"
+          pointerEvents="none"
         />
-      </div>
-    </section>
+      </Box>
+
+      <Box
+        as="span"
+        position="absolute"
+        insetX={0}
+        bottom={0}
+        zIndex={10}
+        height="100rem"
+        width="100%"
+        bgGradient="to-t"
+        gradientVia="whiteAlpha.300"
+        gradientFrom="white"
+        gradientTo="transparent"
+        opacity={0.9}
+        borderRadius="2xl"
+        _dark={{
+          bgGradient: "to-t",
+          gradientVia: "blackAlpha.300",
+          gradientFrom: "black",
+          gradientTo: "transparent"
+        }}
+      />
+    </Box>
   );
 };
 
