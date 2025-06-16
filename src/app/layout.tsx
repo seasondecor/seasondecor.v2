@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
-import { Header } from "@/components/layout/header";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 import { Box } from "@chakra-ui/react";
 
 const geistSans = Geist({
@@ -18,6 +19,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "SeasonDecor",
   description: "A platform for finding the best decorators for your home",
+  metadataBase: new URL("https://www.seasondecor.netlify.app"),
+  icons: {
+    icon: "/fav-icon.svg",
+  },
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {
@@ -34,6 +39,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <Provider>
           <Header />
           <Box as="main">{children}</Box>
+          <Footer />
         </Provider>
       </body>
     </html>

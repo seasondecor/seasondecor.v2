@@ -13,7 +13,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Flex,
-  Container,
   Button,
   Menu,
   Portal,
@@ -23,6 +22,7 @@ import {
   IconButton,
   CloseButton,
   Drawer,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import {
   IconMenu2,
@@ -32,14 +32,20 @@ import {
   IconShoppingCart,
   IconBellFilled,
 } from "@tabler/icons-react";
-import { ColorModeButton } from "@/components/ui/color-mode";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export function Header() {
+export default function Header() {
+  const pathname = usePathname();
   const router = useRouter();
   const navItems = [
     {
       name: "Providers",
       link: "providers",
+    },
+    {
+      name: "About Us",
+      link: "about-us",
     },
     {
       name: "Shop",
@@ -53,14 +59,18 @@ export function Header() {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  if (pathname === "/login" || pathname === "/signup") {
+    return null;
+  }
+
   return (
-    <Container as="header" maxW="container.xl" px={4} pb={2}>
+    <>
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
-          <Flex direction="row" gap={4} alignItems="center">
+          <Flex direction="row" gap={3} alignItems="center">
             <IconButton
               aria-label="cart"
               variant="ghost"
@@ -87,9 +97,7 @@ export function Header() {
                     <Drawer.Header>
                       <Drawer.Title>Drawer Title</Drawer.Title>
                     </Drawer.Header>
-                    <Drawer.Body>
-                     Notifications here
-                    </Drawer.Body>
+                    <Drawer.Body>Notifications here</Drawer.Body>
                     <Drawer.Footer>
                       <Drawer.ActionTrigger asChild>
                         <Button variant="outline">Cancel</Button>
@@ -105,7 +113,7 @@ export function Header() {
             </Drawer.Root>
 
             <Menu.Root>
-              <Menu.Trigger asChild>
+              <Menu.Trigger asChild zIndex="banner">
                 <Button
                   colorPalette="gray"
                   variant="surface"
@@ -122,6 +130,7 @@ export function Header() {
                     borderRadius="md"
                     p={4}
                     minW="200px"
+                    mt={2}
                   >
                     <Stack gap={2}>
                       <Menu.Item
@@ -147,6 +156,7 @@ export function Header() {
                         alignItems="center"
                         gap={2}
                         cursor="pointer"
+                        onClick={() => router.push("/apply")}
                       >
                         <Flex direction="column" gap={1} maxW="200px">
                           <Text fontWeight="bold"> Become a provider</Text>
@@ -201,7 +211,6 @@ export function Header() {
                 </Menu.Positioner>
               </Portal>
             </Menu.Root>
-            <ColorModeButton />
           </Flex>
         </NavBody>
 
@@ -220,14 +229,15 @@ export function Header() {
             onClose={() => setIsMobileMenuOpen(false)}
           >
             {navItems.map((item, idx) => (
-              <a
+              <ChakraLink
+                as={Link}
                 key={`mobile-link-${idx}`}
                 href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300"
+                className="relative"
               >
-                <span className="block">{item.name}</span>
-              </a>
+                <Text fontWeight="bold">{item.name}</Text>
+              </ChakraLink>
             ))}
             <Flex direction="column" gap={2} mt={4} width="100%">
               <Button
@@ -248,6 +258,6 @@ export function Header() {
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
-    </Container>
+    </>
   );
 }

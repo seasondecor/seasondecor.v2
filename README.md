@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## About
+
+ This is an ehancement of SeasonDeocr webiste by adding a new features & updating UIs.
+
 ## Getting Started
 
 First, run the development server:
