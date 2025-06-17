@@ -14,12 +14,14 @@ import {
   Input,
   InputGroup,
   Separator,
+  Portal,
+  Select,
+  createListCollection,
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { PasswordInput } from "@/components/ui/password-input";
 import {
   IconChevronLeft,
-  IconArrowNarrowRight,
   IconMail,
   IconLock,
   IconBrandGoogleFilled,
@@ -29,14 +31,24 @@ import Logo from "@/components/layout/logo";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupFormSchema, type SignupFormValues } from "@/schema/auth-schema";
+import { DatePicker } from "@/components/ui/date-picker";
 
 export default function SignupPage() {
   const router = useRouter();
+  const [dateOfBirth, setDateOfBirth] = React.useState<Date | undefined>();
+
+  const genders = createListCollection({
+    items: [
+      { label: "Male", value: "true" },
+      { label: "Female", value: "false" },
+    ],
+  });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<SignupFormValues>({
     resolver: zodResolver(signupFormSchema),
   });
@@ -50,6 +62,13 @@ export default function SignupPage() {
       console.error("Signup error:", error);
     }
   };
+
+  // Update form value when date changes
+  React.useEffect(() => {
+    if (dateOfBirth) {
+      setValue("dateOfBirth", dateOfBirth.toISOString());
+    }
+  }, [dateOfBirth, setValue]);
 
   return (
     <Box
@@ -102,7 +121,7 @@ export default function SignupPage() {
               <Input
                 {...register("firstName")}
                 placeholder="John"
-                variant="subtle"
+                variant="outline"
               />
             </Field.Root>
             <Field.Root required>
@@ -112,7 +131,7 @@ export default function SignupPage() {
               <Input
                 {...register("lastName")}
                 placeholder="Doe"
-                variant="subtle"
+                variant="outline"
               />
             </Field.Root>
           </HStack>
@@ -121,7 +140,7 @@ export default function SignupPage() {
             <InputGroup startElement={<IconMail size={18} />}>
               <Input
                 {...register("email")}
-                variant="subtle"
+                variant="outline"
                 placeholder="example.123@example.com"
               />
             </InputGroup>
@@ -137,7 +156,7 @@ export default function SignupPage() {
             <InputGroup startElement={<IconLock size={18} />}>
               <PasswordInput
                 {...register("password")}
-                variant="subtle"
+                variant="outline"
                 placeholder="••••••••••••"
               />
             </InputGroup>
@@ -152,20 +171,57 @@ export default function SignupPage() {
             <InputGroup startElement={<IconLockCheck size={18} />}>
               <PasswordInput
                 {...register("confirmPassword")}
-                variant="subtle"
+                variant="outline"
                 placeholder="••••••••••••"
               />
             </InputGroup>
 
             <Field.ErrorText>{errors.confirmPassword?.message}</Field.ErrorText>
           </Field.Root>
+          <HStack gap={4} w="full">
+            <Select.Root required collection={genders} size="sm">
+              <Select.HiddenSelect />
+              <Select.Label>Select gender</Select.Label>
+              <Select.Control>
+                <Select.Trigger>
+                  <Select.ValueText placeholder="Select gender" />
+                </Select.Trigger>
+                <Select.IndicatorGroup>
+                  <Select.Indicator />
+                </Select.IndicatorGroup>
+              </Select.Control>
+              <Portal>
+                <Select.Positioner>
+                  <Select.Content>
+                    {genders.items.map((gender) => (
+                      <Select.Item item={gender} key={gender.value}>
+                        {gender.label}
+                        <Select.ItemIndicator />
+                      </Select.Item>
+                    ))}
+                  </Select.Content>
+                </Select.Positioner>
+              </Portal>
+            </Select.Root>
+            <Field.Root invalid={!!errors.dateOfBirth}>
+              <Field.Label>Date of birth</Field.Label>
+              <DatePicker
+                value={dateOfBirth}
+                onChange={setDateOfBirth}
+                placeholder="Select date of birth"
+              />
+              <Field.ErrorText>
+                {errors.dateOfBirth?.message}
+              </Field.ErrorText>
+            </Field.Root>
+          </HStack>
+
           <Button
             type="submit"
             w="full"
             disabled={!!Object.keys(errors).length}
           >
-            Continue
-            <IconArrowNarrowRight />
+            Create account
           </Button>
         </Box>
         <HStack w="full" align="center">

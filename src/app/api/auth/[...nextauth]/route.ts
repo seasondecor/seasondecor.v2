@@ -67,7 +67,7 @@ export const authOptions = {
           }
 
           const user: User = {
-            id: response.accountId.toString(), // NextAuth requires an `id` property on the User object
+            id: response.accountId.toString(),
             accessToken: response.token,
             roleId: response.roleId,
             accountId: response.accountId,

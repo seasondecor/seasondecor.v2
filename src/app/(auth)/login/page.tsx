@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Box,
@@ -14,6 +14,8 @@ import {
   InputGroup,
   Separator,
   Link as ChakraLink,
+  Alert,
+  CloseButton,
 } from "@chakra-ui/react";
 import { PasswordInput } from "@/components/ui/password-input";
 import {
@@ -28,9 +30,13 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema, type LoginFormValues } from "@/schema/auth-schema";
+import { signIn } from "next-auth/react";
+import { BeatLoader } from "react-spinners";
 
 export default function LoginPage() {
   const router = useRouter();
+  const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const {
     register,
@@ -47,6 +53,16 @@ export default function LoginPage() {
       // router.push("/dashboard"); // Uncomment when ready to redirect
     } catch (error) {
       console.error("Login error:", error);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsGoogleLoading(true);
+    try {
+      await signIn("google", { callbackUrl: "/" });
+    } catch {
+      setError("Failed to login with Google");
+      setIsGoogleLoading(false);
     }
   };
 
@@ -86,6 +102,11 @@ export default function LoginPage() {
             Sign up.
           </ChakraLink>
         </Text>
+        <Alert.Root status="error" variant="surface" hidden={!error}>
+          <Alert.Indicator />
+          <Alert.Title>{error}</Alert.Title>
+          <CloseButton pos="relative" top="-2" insetEnd="-2" />
+        </Alert.Root>
         <Box
           as="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -98,7 +119,7 @@ export default function LoginPage() {
             <InputGroup startElement={<IconMail size={18} />}>
               <Input
                 {...register("email")}
-                variant="subtle"
+                variant="outline"
                 placeholder="example.123@example.com"
               />
             </InputGroup>
@@ -123,14 +144,18 @@ export default function LoginPage() {
             <InputGroup startElement={<IconLock size={18} />}>
               <PasswordInput
                 {...register("password")}
-                variant="subtle"
+                variant="outline"
                 placeholder="••••••••••••"
               />
             </InputGroup>
 
             <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
           </Field.Root>
-          <Button type="submit" w="full" disabled={!!Object.keys(errors).length}>
+          <Button
+            type="submit"
+            w="full"
+            disabled={!!Object.keys(errors).length}
+          >
             Continue
             <IconArrowNarrowRight />
           </Button>
@@ -140,7 +165,14 @@ export default function LoginPage() {
           <Text fontSize="sm">OR</Text>
           <Separator flex="1" />
         </HStack>
-        <Button colorPalette="blue" variant="outline" w="full">
+        <Button
+          colorPalette="blue"
+          variant="outline"
+          w="full"
+          onClick={handleGoogleSignIn}
+          loading={isGoogleLoading}
+          spinner={<BeatLoader size={8} color="white" />}
+        >
           <IconBrandGoogleFilled /> Login with Google
         </Button>
         <Text fontSize="sm" textAlign="start" color="gray.400">
