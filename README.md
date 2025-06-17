@@ -1,40 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SeasonDecor v2
 
-## About
+A modern, feature-rich web application for seasonal decor inspiration and management.
 
- This is an ehancement of SeasonDeocr webiste by adding a new features & updating UIs.
+---
 
-## Getting Started
+## 🚀 Tech Stack
 
-First, run the development server:
+- **[Next.js 15](https://nextjs.org/)** — React framework for fast, scalable web apps
+- **[Chakra UI](https://chakra-ui.com/)** — Accessible, customizable component library
+- **[TanStack Query](https://tanstack.com/query/latest)** — Powerful data fetching & caching
+- **[NextAuth.js](https://next-auth.js.org/)** — Authentication for Next.js
+- **[Framer Motion](https://www.framer.com/motion/)** — Production-ready animations
+- **[GSAP](https://gsap.com/)** — Advanced animations and timeline control
+- **[three.js](https://threejs.org/)** + **[drei](https://github.com/pmndrs/drei)** — 3D graphics and helpers
+- **[simplex-noise](https://github.com/jwagner/simplex-noise.js/)** — Procedural noise for creative effects
+
+---
+
+## ✨ Features
+
+- Modern, responsive UI with Chakra UI
+- Secure authentication with NextAuth.js
+- Smooth page transitions and micro-interactions (Framer Motion, GSAP)
+- Real-time data fetching and caching (TanStack Query)
+- 3D visualizations and effects (three.js, drei, simplex-noise)
+- Modular, scalable codebase with Next.js 15 App Router
+
+---
+
+## 🛠️ Getting Started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/src/app` — Main application pages and routes
+- `/src/components` — Reusable UI components
+- `/src/types` — TypeScript types and interfaces
+- `/src/theme.ts` — Chakra UI theme customization
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📚 Learn More
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Chakra UI Docs](https://chakra-ui.com/docs)
+- [TanStack Query Docs](https://tanstack.com/query/latest/docs)
+- [NextAuth.js Docs](https://next-auth.js.org/getting-started/introduction)
+- [Framer Motion Docs](https://www.framer.com/motion/)
+- [GSAP Docs](https://gsap.com/docs/)
+- [three.js Docs](https://threejs.org/docs/)
+- [drei Docs](https://github.com/pmndrs/drei)
+- [simplex-noise Docs](https://github.com/jwagner/simplex-noise.js/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🚀 Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Deploy instantly on [Vercel](https://vercel.com/) or your preferred platform.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🤝 Contributing
+
+Pull requests and feedback are welcome! Please open an issue to discuss your ideas or report bugs.
+
+---
+
+**SeasonDecor v2 — Modern seasonal

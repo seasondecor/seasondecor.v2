@@ -1,0 +1,20 @@
+export interface AccountProfile {
+  id: number;
+  slug: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber?: string;
+  dateOfBirth?: string;
+  address?: string;
+  gender?: boolean;
+  status: unknown;
+  location: string;
+  reputation: number;
+  provinceCode: string;
+  roleId: number;
+  isDisable: boolean;
+  isProvider: boolean;
+  providerVerified: boolean;
+  avatar: string;
+};

@@ -10,10 +10,25 @@ import {
   Avatar,
   Image,
   Tabs,
+  Skeleton,
+  SkeletonText,
+  SkeletonCircle,
 } from "@chakra-ui/react";
 import { AboutTab } from "./_components/about-tab";
+import { ConnectionTab } from "./_components/connection-tab";
+import { useSession } from "next-auth/react";
+import { useGetAccountById } from "@/queries/account/getById";
+import { useGetFollowing } from "@/queries/account/getFollowing";
 
 export default function GuestProfilePage() {
+  const { data: session } = useSession();
+
+  const accountId = session?.accountId;
+
+  const { data: account, isLoading } = useGetAccountById(accountId);
+
+  const { data: following, isLoading: followingLoading } = useGetFollowing();
+
   return (
     <Container maxW="7xl" py={8}>
       <Tabs.Root
@@ -27,11 +42,13 @@ export default function GuestProfilePage() {
       >
         {/* Left Sidebar */}
         <Box
-          w={{ base: "full", md: "30rem" }}
+          w={{ base: "full", md: "27rem" }}
           p={{ base: 4, md: 10 }}
-          borderTop={{ base: "none", md: "1px solid" }}
-          borderRight={{ base: "none", md: "1px solid" }}
-          borderTopRightRadius="3xl"
+          borderTop={{ base: "none", md: "revert" }}
+          borderBottom={{ base: "none", md: "revert" }}
+          borderRight={{ base: "none", md: "none" }}
+          borderRadius="3xl"
+          boxShadow="custom"
           mb={{ base: 6, md: 0 }}
           display="flex"
           flexDirection="column"
@@ -53,7 +70,8 @@ export default function GuestProfilePage() {
                 p={5}
                 rounded="md"
                 value="about"
-                _selected={{ bg: "gray.900", fontWeight: "bold", py: 8, pr: 6 }}
+                _hover={{ bg: "gray.950" }}
+                _selected={{ bg: "gray.900", fontWeight: "bold", p: 7 }}
                 width={{ base: "full", md: "full" }}
                 justifyContent="flex-start"
               >
@@ -69,7 +87,8 @@ export default function GuestProfilePage() {
                 p={5}
                 rounded="md"
                 value="request"
-                _selected={{ bg: "gray.900", fontWeight: "bold", py: 8, pr: 6 }}
+                _hover={{ bg: "gray.900" }}
+                _selected={{ bg: "gray.900", fontWeight: "bold", p: 7 }}
                 width={{ base: "full", md: "full" }}
                 justifyContent="flex-start"
               >
@@ -81,14 +100,15 @@ export default function GuestProfilePage() {
                     fit="cover"
                     alt="Naruto Uzumaki"
                   />
-                  <Text fontSize="md">Booking request</Text>
+                  <Text fontSize="md">Past Booking</Text>
                 </Flex>
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="connections"
                 p={5}
                 rounded="md"
-                _selected={{ bg: "gray.900", fontWeight: "bold", py: 8, pr: 6 }}
+                _hover={{ bg: "gray.900" }}
+                _selected={{ bg: "gray.900", fontWeight: "bold", p: 7 }}
                 width={{ base: "full", md: "full" }}
                 justifyContent="flex-start"
               >
@@ -145,6 +165,7 @@ export default function GuestProfilePage() {
         >
           <Tabs.Content
             value="about"
+            width="full"
             _open={{
               animationName: "fade-in, scale-in",
               animationDuration: "300ms",
@@ -154,7 +175,16 @@ export default function GuestProfilePage() {
               animationDuration: "120ms",
             }}
           >
-            <AboutTab />
+            {isLoading ? (
+              <Box>
+                <SkeletonCircle height="100px" width="100px" mb={4} />
+                <Skeleton height="24px" width="200px" mb={2} />
+                <Skeleton height="18px" width="100px" mb={6} />
+                <SkeletonText mt="4" noOfLines={4} gap="4" />
+              </Box>
+            ) : (
+              account && <AboutTab account={account} />
+            )}
           </Tabs.Content>
 
           <Tabs.Content
@@ -185,10 +215,11 @@ export default function GuestProfilePage() {
               animationDuration: "120ms",
             }}
           >
-            <Heading as="h2" size="4xl">
-              Connections
-            </Heading>
-            <Text>Content for connections will go here.</Text>
+            {followingLoading ? (
+              <SkeletonText noOfLines={3} gap="4" />
+            ) : (
+              following && <ConnectionTab following={following} />
+            )}
           </Tabs.Content>
         </Box>
       </Tabs.Root>

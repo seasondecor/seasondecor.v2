@@ -24,6 +24,7 @@ import {
   Drawer,
   Link as ChakraLink,
   Avatar,
+  SkeletonCircle,
 } from "@chakra-ui/react";
 import {
   IconMenu2,
@@ -44,9 +45,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { useGetAccountById } from "@/queries/account/getById";
 
 export default function Header() {
   const { data: session, status } = useSession();
+
+  const accountId = session?.accountId;
+
+  const { data: account, isLoading } = useGetAccountById(accountId);
 
   //console.log("Session data:", session);
   //console.log("Session status:", status);
@@ -134,10 +140,19 @@ export default function Header() {
               <Avatar.Root
                 size="sm"
                 cursor="pointer"
+                shape="full"
                 onClick={() => router.push("/users/profile")}
               >
-                <Avatar.Fallback name="customer" />
-                <Avatar.Image src={session.user?.image || undefined} />
+                {isLoading ? (
+                  <Avatar.Fallback>
+                    <SkeletonCircle />
+                  </Avatar.Fallback>
+                ) : (
+                  <>
+                    <Avatar.Fallback name="customer" />
+                    <Avatar.Image src={account?.avatar} />
+                  </>
+                )}
               </Avatar.Root>
             )}
 
@@ -282,7 +297,7 @@ export default function Header() {
                         </Menu.Item>
                         <Separator size="md" />
                         <Menu.Item
-                          value="help-center"
+                          value="logout"
                           py={2}
                           px={3}
                           transition="background-color 0.2s"
