@@ -22,6 +22,21 @@ const config = defineConfig({
         to: { transform: "rotate(360deg)" },
       },
     },
+    semanticTokens: {
+      shadows: {
+        custom: {
+          value: {
+            _dark:
+              "0 0 8px rgba(255, 255, 255, 0.06), 0 0 24px rgba(255, 255, 255, 0.08)",
+          },
+        },
+        right: {
+          value: {
+            _dark: "6px 0 12px rgba(255, 255, 255, 0.08)",
+          }, 
+        }
+      },
+    },
   },
 });
 

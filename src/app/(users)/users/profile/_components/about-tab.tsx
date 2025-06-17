@@ -10,101 +10,187 @@ import {
   Text,
   Button,
   Heading,
-  Icon,
+  Badge,
+  AbsoluteCenter,
+  ProgressCircle,
+  Separator,
+  Alert,
 } from "@chakra-ui/react";
 import {
-  IconWorld,
-  IconBriefcase,
-  IconBulb,
-  IconMasksTheater,
-  IconMessageDots,
+  IconLabel,
+  IconMail,
+  IconMap2,
+  IconPhone,
+  IconGenderGenderfluid,
+  IconShield,
+  IconCake,
 } from "@tabler/icons-react";
+import { AccountProfile } from "@/types";
+import { Tooltip } from "@/components/ui/tooltip";
 
-export const AboutTab = () => {
+interface AboutTabProps {
+  account: AccountProfile;
+}
+
+export const AboutTab: React.FC<AboutTabProps> = ({ account }) => {
+  if (!account) {
+    return <Text>Loading...</Text>;
+  }
+
+  const missingFields = [
+    !account.address,
+    !account.gender,
+    !account.dateOfBirth,
+    !account.phoneNumber,
+  ].some(Boolean);
+
   return (
-    <Box
-      flex="1"
-      borderTop="none"
-      borderBottom="none"
-      p={0}
-      px={{ base: 4, md: 0 }}
-    >
+    <Box flex="1" borderTop="none" borderBottom="none">
       {/* About Me Section */}
-      <Flex justify="space-between" align="center" mb={6}>
-        <Heading as="h2" size="4xl">
+      <Flex
+        justify="space-between"
+        align={{ base: "stretch", md: "center" }}
+        mb={6}
+        direction={{ base: "column", md: "row" }}
+        gap={{ base: 4, md: 0 }}
+      >
+        <Heading
+          as="h2"
+          fontSize="4xl"
+          width={{ base: "100%", md: "20rem" }}
+          mb={{ base: 2, md: 0 }}
+        >
           About me
         </Heading>
-        <Button size="sm" variant="outline">
-          Edit
-        </Button>
-      </Flex>
 
+        {missingFields ? (
+          <Alert.Root
+            title="Info"
+            status="info"
+            variant="surface"
+            width="full"
+            px={{ base: 4, md: 6 }}
+            py={4}
+            borderRadius="lg"
+            alignItems="center"
+            size="sm"
+            animation="slide-from-right .3s ease-out"
+          >
+            <Alert.Indicator />
+            <Alert.Content color="fg">
+              <Alert.Title>Note</Alert.Title>
+              <Alert.Description>
+                Update your informations to get access to the services.
+              </Alert.Description>
+            </Alert.Content>
+            <Button alignSelf={{ base: "center", md: "center" }}>Update</Button>
+          </Alert.Root>
+        ) : (
+          <Button
+            size="sm"
+            variant="outline"
+            alignSelf={{ base: "flex-end", md: "center" }}
+          >
+            Edit
+          </Button>
+        )}
+      </Flex>
       <VStack align="flex-start" gap={6} mb={8}>
         <Box
-          py={0}
-          borderRadius="none"
+          px={20}
+          py={10}
+          borderColor="gray.700"
+          borderRadius="3xl"
+          boxShadow="custom"
           textAlign={{ base: "center", md: "center" }}
           mx={{ base: "auto", md: "unset" }}
-          shadow="none"
         >
           <Avatar.Root shape="full" size="2xl">
             <Avatar.Fallback name="Random User" />
-            <Avatar.Image src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04" />
+            <Avatar.Image src={account.avatar} />
           </Avatar.Root>
+
           <Text fontSize="xl" fontWeight="bold">
-            Steve
+            {account.firstName} {account.lastName}
           </Text>
-          <Text fontSize="sm" color="gray.600">
+          <Text fontSize="sm" color="gray.500">
             Guest
           </Text>
         </Box>
 
         <HStack gap={3} align="center">
-          <Icon as={IconWorld} w={5} h={5} color="gray.600" />
-          <Text>
-            Where I&apos;ve always wanted to go:{" "}
-            <Text as="span" fontWeight="semibold">
-              Russia
+          <HStack>
+            <IconLabel />
+            <Text>Display name:</Text>
+            <Text fontWeight="semibold">
+              {account.firstName} {account.lastName}
             </Text>
-          </Text>
+          </HStack>
+          <Tooltip showArrow content="This is your slug">
+            <Badge variant="surface">{account.slug}</Badge>
+          </Tooltip>
         </HStack>
 
         <HStack gap={3} align="center">
-          <Icon as={IconBriefcase} w={5} h={5} color="gray.600" />
-          <Text>
-            My work:{" "}
-            <Text as="span" fontWeight="semibold">
-              Student
-            </Text>
-          </Text>
+          <IconMail />
+          <Text>Email:</Text>
+          <Text fontWeight="semibold"> {account.email}</Text>
+        </HStack>
+
+        <HStack gap={3} align="center">
+          <IconCake />
+          <Text>Date of birth:</Text>
+          <Text fontWeight="semibold"> {account.dateOfBirth || "N/A"}</Text>
+        </HStack>
+
+        <HStack gap={3} align="center">
+          <IconGenderGenderfluid />
+          <Text>Gender:</Text>
+          <Text fontWeight="semibold"> {account.gender || "N/A"}</Text>
+        </HStack>
+
+        <HStack gap={3} align="center">
+          <IconPhone />
+          <Text>Phone number:</Text>
+          <Text fontWeight="semibold"> {account.phoneNumber || "N/A"}</Text>
+        </HStack>
+
+        <HStack gap={3} align="center">
+          <IconMap2 />
+          <Text>Address:</Text>
+          <Text fontWeight="semibold"> {account.address || "N/A"}</Text>
+        </HStack>
+
+        <HStack gap={3} align="center">
+          <IconShield />
+          <Text>Reputation point:</Text>
+            <ProgressCircle.Root
+            size="xl"
+            colorPalette={
+              account.reputation >= 70
+              ? "green"
+              : account.reputation >= 30
+              ? "yellow"
+              : "red"
+            }
+            value={account.reputation}
+            >
+            <ProgressCircle.Circle>
+              <ProgressCircle.Track />
+              <ProgressCircle.Range />
+            </ProgressCircle.Circle>
+            <AbsoluteCenter>
+              <ProgressCircle.ValueText />
+            </AbsoluteCenter>
+            </ProgressCircle.Root>
         </HStack>
       </VStack>
-
-      {/* My Interests Section */}
-      <Heading as="h3" size="md" mb={4}>
-        My interests
-      </Heading>
-      <Flex wrap="wrap" mb={8}>
-        <HStack gap={2} align="center" mr={6} mb={2}>
-          <Text>Movies</Text>
-        </HStack>
-        <HStack gap={2} align="center" mr={6} mb={2}>
-          <Text>Video games</Text>
-        </HStack>
-        <HStack gap={2} align="center" mr={6} mb={2}>
-          <Icon as={IconBulb} w={5} h={5} color="gray.600" />
-          <Text>Nightlife</Text>
-        </HStack>
-        <HStack gap={2} align="center" mr={6} mb={2}>
-          <Icon as={IconMasksTheater} w={5} h={5} color="gray.600" />
-          <Text>Theater</Text>
-        </HStack>
-      </Flex>
-
-      {/* Reviews I&apos;ve Written Section */}
+      <Separator size="md" variant="solid" my={4} />
       <HStack gap={3} align="center">
-        <Icon as={IconMessageDots} w={5} h={5} color="gray.600" />
-        <Text>Reviews I&apos;ve written</Text>
+        <Text>Account status:</Text>
+        <Badge size="md" colorPalette={account.isDisable ? "red" : "green"}>
+          {account.isDisable ? "Disabled" : "Active"}
+        </Badge>
       </HStack>
     </Box>
   );

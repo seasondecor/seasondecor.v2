@@ -34,7 +34,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       className={`!scroll-smooth ${geistSans.variable} ${geistMono.variable}`}
     >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`___next ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Provider>
           <Header />

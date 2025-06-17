@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Define protected routes
-const protectedRoutes = [{ path: "/user" }, { path: "/booking/request" }];
+const protectedRoutes = [{ path: "/users" }, { path: "/booking/request" }];
 
 // Define public routes
 const publicRoutes = ["/", "/login", "/signup"];
