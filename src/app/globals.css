@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+
+#nprogress .spinner {
+    display: none !important;
+  }
