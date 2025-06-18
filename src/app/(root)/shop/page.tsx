@@ -7,19 +7,21 @@ import {
   Card,
   Image,
   Text,
-  Button,
   Heading,
   Skeleton,
   SkeletonText,
   FormatNumber,
   Flex,
   Box,
+  HStack,
+  Badge,
+  Icon,
 } from "@chakra-ui/react";
-import { useGetListProduct } from "@/queries/product";
+import { useGetListProduct } from "@/queries";
 import { Product } from "@/types";
 import { GlareHover } from "@/components/animated";
 import { Vortex } from "@/components/animated";
-import { IconShoppingCartPlus } from "@tabler/icons-react";
+import { IconStar } from "@tabler/icons-react";
 import { FadeContent } from "@/components/animated";
 
 export default function ShopPage() {
@@ -161,10 +163,15 @@ export default function ShopPage() {
                         </Text>
                       </Card.Body>
                       <Card.Footer gap="2">
-                        <Button variant="outline" colorPalette="blue">
-                          <IconShoppingCartPlus />
-                          Buy now
-                        </Button>
+                        <HStack justifyContent="space-between" width="full">
+                          <Badge variant="outline" size="md">
+                            {product.rate}
+                            <Icon size="sm">
+                              <IconStar />
+                            </Icon>
+                          </Badge>
+                          <Text fontSize="sm">{product.totalSold} sold</Text>
+                        </HStack>
                       </Card.Footer>
                     </Card.Root>
                   </GlareHover>

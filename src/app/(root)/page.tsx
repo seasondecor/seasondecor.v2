@@ -33,12 +33,15 @@ import dynamic from "next/dynamic";
 import FeaturesSection from "./_components/features-section";
 
 export default function Home() {
-  const NoSSR = dynamic(() => import("@/components/animated").then((mod) => mod.BeamsBg), {
-    ssr: false,
-  });
+  const NoSSR = dynamic(
+    () => import("@/components/animated").then((mod) => mod.BeamsBg),
+    {
+      ssr: false,
+    }
+  );
   return (
-    <Box position="relative" minH="100vh" mt="-80px">
-      <>
+    <>
+      <Box position="relative" minH="100vh" mt="-68px">
         <Box
           position="absolute"
           inset={0}
@@ -46,6 +49,7 @@ export default function Home() {
           height="100vh"
           zIndex={0}
           overflow="hidden"
+          bgColor="black"
         >
           <NoSSR />
           <Box
@@ -65,11 +69,11 @@ export default function Home() {
             }}
           />
         </Box>
-        <Box as="section" position="relative" zIndex={10} py={16}>
+        <Box as="section" position="relative" zIndex={10} pt={20}>
           <Container
             maxW="7xl"
             px={{ base: 6, md: 12 }}
-            py={{ base: 16, md: 24, lg: 32 }}
+            pt={{ base: 16, md: 24, lg: 32 }}
           >
             <Flex
               direction={{ base: "column", lg: "row" }}
@@ -383,9 +387,8 @@ export default function Home() {
             </Flex>
           </Container>
         </Box>
-      </>
-
+      </Box>
       <FeaturesSection />
-    </Box>
+    </>
   );
 }

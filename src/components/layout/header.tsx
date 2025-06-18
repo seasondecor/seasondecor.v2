@@ -100,6 +100,7 @@ export default function Header() {
               variant="ghost"
               size="md"
               rounded="full"
+              onClick={() => router.push("/cart")}
             >
               <IconShoppingCart />
             </IconButton>
