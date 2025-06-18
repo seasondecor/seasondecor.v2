@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 
 const SUB_URL = `api/Follow`;
 
-export function useGetFollowing() {
+export function useGetFollowing(enabled: boolean) {
     const { status } = useSession();
   return useQuery({
     queryKey: ["following-by-account"],
@@ -15,6 +15,6 @@ export function useGetFollowing() {
       );
       return response.data;
     },
-    enabled: status === "authenticated",
+    enabled: status === "authenticated" && enabled,
   });
 }

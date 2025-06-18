@@ -31,7 +31,6 @@ export default function Footer() {
   return (
     <Box
       as="footer"
-      bg="black"
       py={{ base: 10, md: 20 }}
       px={{ base: 4, md: 8 }}
       color="whiteAlpha.800"

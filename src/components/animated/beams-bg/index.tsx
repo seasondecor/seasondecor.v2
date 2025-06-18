@@ -195,7 +195,7 @@ import {
     beamWidth = 3,
     beamHeight = 15,
     beamNumber = 12,
-    lightColor = "#ffffff",
+    lightColor = "#0400ff",
     speed = 2,
     noiseIntensity = 1.75,
     scale = 0.2,

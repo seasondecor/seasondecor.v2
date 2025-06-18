@@ -49,7 +49,7 @@ export const AboutTab: React.FC<AboutTabProps> = ({ account }) => {
       {/* About Me Section */}
       <Flex
         justify="space-between"
-        align={{ base: "stretch", md: "center" }}
+        align={{ base: "stretch", md: "none" }}
         mb={6}
         direction={{ base: "column", md: "row" }}
         gap={{ base: 4, md: 0 }}
@@ -57,7 +57,7 @@ export const AboutTab: React.FC<AboutTabProps> = ({ account }) => {
         <Heading
           as="h2"
           fontSize="4xl"
-          width={{ base: "100%", md: "20rem" }}
+          width={{ base: "100%", md: "25rem" }}
           mb={{ base: 2, md: 0 }}
         >
           About me
@@ -68,9 +68,6 @@ export const AboutTab: React.FC<AboutTabProps> = ({ account }) => {
             title="Info"
             status="info"
             variant="surface"
-            width="full"
-            px={{ base: 4, md: 6 }}
-            py={4}
             borderRadius="lg"
             alignItems="center"
             size="sm"
@@ -164,17 +161,17 @@ export const AboutTab: React.FC<AboutTabProps> = ({ account }) => {
         <HStack gap={3} align="center">
           <IconShield />
           <Text>Reputation point:</Text>
-            <ProgressCircle.Root
+          <ProgressCircle.Root
             size="xl"
             colorPalette={
               account.reputation >= 70
-              ? "green"
-              : account.reputation >= 30
-              ? "yellow"
-              : "red"
+                ? "green"
+                : account.reputation >= 30
+                ? "yellow"
+                : "red"
             }
             value={account.reputation}
-            >
+          >
             <ProgressCircle.Circle>
               <ProgressCircle.Track />
               <ProgressCircle.Range />
@@ -182,7 +179,7 @@ export const AboutTab: React.FC<AboutTabProps> = ({ account }) => {
             <AbsoluteCenter>
               <ProgressCircle.ValueText />
             </AbsoluteCenter>
-            </ProgressCircle.Root>
+          </ProgressCircle.Root>
         </HStack>
       </VStack>
       <Separator size="md" variant="solid" my={4} />

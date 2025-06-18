@@ -37,9 +37,17 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         className={`___next ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Provider>
-          <Header />
-          <Box as="main">{children}</Box>
-          <Footer />
+          <Box
+            bgImage="url('/static/profile-bg-desktop.png')"
+            bgSize="cover"
+            bgPos="center"
+            bgRepeat="no-repeat"
+            as="main"
+          >
+            <Header />
+            {children}
+            <Footer />
+          </Box>
         </Provider>
       </body>
     </html>
