@@ -74,6 +74,7 @@ export const GlareHover: React.FC<GlareHoverProps> = ({
     backgroundSize: `${glareSize}% ${glareSize}%, 100% 100%`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "-100% -100%, 0 0",
+    borderRadius: "1rem",
     pointerEvents: "none",
     zIndex: 1,
   };
@@ -92,4 +93,3 @@ export const GlareHover: React.FC<GlareHoverProps> = ({
     </div>
   );
 };
-

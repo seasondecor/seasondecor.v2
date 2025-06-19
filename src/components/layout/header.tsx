@@ -45,7 +45,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
-import { useGetAccountById } from "@/queries/account/getById";
+import { useGetAccountById } from "@/queries";
 
 export default function Header() {
   const { data: session, status } = useSession();
@@ -60,8 +60,8 @@ export default function Header() {
   const router = useRouter();
   const navItems = [
     {
-      name: "Providers",
-      link: "/providers",
+      name: "Humans",
+      link: "/humans",
     },
     {
       name: "About Us",

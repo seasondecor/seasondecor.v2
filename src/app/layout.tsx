@@ -34,17 +34,22 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       className={`!scroll-smooth ${geistSans.variable} ${geistMono.variable}`}
     >
       <body
-        className={`___next ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`___next`}
       >
         <Provider>
+          <Header />
           <Box
+            position="relative"
             bgImage="url('/static/profile-bg-desktop.png')"
             bgSize="cover"
             bgPos="center"
             bgRepeat="no-repeat"
             as="main"
+            overflowX="hidden"
+            minH="100vh"  
+            mt="-80px"
+            pt={20}
           >
-            <Header />
             {children}
             <Footer />
           </Box>

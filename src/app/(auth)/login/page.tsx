@@ -70,9 +70,6 @@ export default function LoginPage() {
     <Box
       position="relative"
       minH="100vh"
-      bgGradient="to-r"
-      gradientFrom="gray.900"
-      gradientTo="gray.950"
       display="flex"
       justifyContent="center"
       alignItems="center"
@@ -119,7 +116,7 @@ export default function LoginPage() {
             <InputGroup startElement={<IconMail size={18} />}>
               <Input
                 {...register("email")}
-                variant="outline"
+                variant="subtle"
                 placeholder="example.123@example.com"
               />
             </InputGroup>
@@ -144,7 +141,7 @@ export default function LoginPage() {
             <InputGroup startElement={<IconLock size={18} />}>
               <PasswordInput
                 {...register("password")}
-                variant="outline"
+                variant="subtle"
                 placeholder="••••••••••••"
               />
             </InputGroup>

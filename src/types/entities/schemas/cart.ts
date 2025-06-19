@@ -1,4 +1,4 @@
-export interface Cart {
+export interface CartSchema {
     id: number;
     totalItem: number;
     totalPrice: number;

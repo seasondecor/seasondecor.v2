@@ -27,7 +27,7 @@ export const DatePicker = ({
     <Popover.Root open={isOpen} positioning={{ placement: "bottom-start" }}>
       <Popover.Trigger asChild width="100%">
         <Button
-          variant="outline"
+          variant="subtle"
           width="100%"
           justifyContent="start"
           textAlign="left"

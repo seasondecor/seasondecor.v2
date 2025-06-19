@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { useGetCart } from "@/queries";
 import { useSession } from "next-auth/react";
-import { IconBasket } from "@tabler/icons-react";
 import { HashLoader } from "react-spinners";
 
 export default function CartPage() {
@@ -23,7 +22,7 @@ export default function CartPage() {
 
   if (isLoading) {
     return (
-      <Center minH="100vh">
+      <Center minH="70vh">
         <Icon size="2xl">
           <HashLoader color="white" />
         </Icon>
