@@ -74,9 +74,6 @@ export default function SignupPage() {
     <Box
       position="relative"
       minH="100vh"
-      bgGradient="to-r"
-      gradientFrom="gray.900"
-      gradientTo="gray.950"
       display="flex"
       justifyContent="center"
       alignItems="center"
@@ -121,7 +118,7 @@ export default function SignupPage() {
               <Input
                 {...register("firstName")}
                 placeholder="John"
-                variant="outline"
+                variant="subtle"
               />
             </Field.Root>
             <Field.Root required>
@@ -131,7 +128,7 @@ export default function SignupPage() {
               <Input
                 {...register("lastName")}
                 placeholder="Doe"
-                variant="outline"
+                variant="subtle"
               />
             </Field.Root>
           </HStack>
@@ -140,7 +137,7 @@ export default function SignupPage() {
             <InputGroup startElement={<IconMail size={18} />}>
               <Input
                 {...register("email")}
-                variant="outline"
+                variant="subtle"
                 placeholder="example.123@example.com"
               />
             </InputGroup>
@@ -156,7 +153,7 @@ export default function SignupPage() {
             <InputGroup startElement={<IconLock size={18} />}>
               <PasswordInput
                 {...register("password")}
-                variant="outline"
+                variant="subtle"
                 placeholder="••••••••••••"
               />
             </InputGroup>
@@ -171,7 +168,7 @@ export default function SignupPage() {
             <InputGroup startElement={<IconLockCheck size={18} />}>
               <PasswordInput
                 {...register("confirmPassword")}
-                variant="outline"
+                variant="subtle"
                 placeholder="••••••••••••"
               />
             </InputGroup>
@@ -179,7 +176,7 @@ export default function SignupPage() {
             <Field.ErrorText>{errors.confirmPassword?.message}</Field.ErrorText>
           </Field.Root>
           <HStack gap={4} w="full">
-            <Select.Root required collection={genders} size="sm">
+            <Select.Root required collection={genders} size="sm" variant="subtle">
               <Select.HiddenSelect />
               <Select.Label>Select gender</Select.Label>
               <Select.Control>
@@ -210,9 +207,7 @@ export default function SignupPage() {
                 onChange={setDateOfBirth}
                 placeholder="Select date of birth"
               />
-              <Field.ErrorText>
-                {errors.dateOfBirth?.message}
-              </Field.ErrorText>
+              <Field.ErrorText>{errors.dateOfBirth?.message}</Field.ErrorText>
             </Field.Root>
           </HStack>
 

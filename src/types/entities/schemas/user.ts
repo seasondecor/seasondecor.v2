@@ -1,4 +1,4 @@
-export interface AccountProfile {
+export interface UserSchema {
   id: number;
   slug: string;
   email: string;

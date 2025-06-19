@@ -10,8 +10,3 @@ export enum Season {
   NewYear = "New Year",
   Valentine = "Valentine's Day",
 }
-
-export enum ProductStatus {
-  InStock = "Instock",
-  OutOfStock = "Outofstock",
-}

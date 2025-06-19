@@ -21,8 +21,7 @@ import { AboutTab } from "./_components/about-tab";
 import { ConnectionTab } from "./_components/connection-tab";
 import { BookingTab } from "./_components/booking-tab";
 import { useSession } from "next-auth/react";
-import { useGetAccountById } from "@/queries";
-import { useGetFollowing } from "@/queries";
+import { useGetAccountById, useGetFollowing } from "@/queries";
 
 export default function GuestProfilePage() {
   const { data: session } = useSession();

@@ -182,7 +182,7 @@ export const AboutTab: React.FC<AboutTabProps> = ({ account }) => {
           </ProgressCircle.Root>
         </HStack>
       </VStack>
-      <Separator size="md" variant="solid" my={4} />
+      <Separator size="md" my={4} />
       <HStack gap={3} align="center">
         <Text>Account status:</Text>
         <Badge size="md" colorPalette={account.isDisable ? "red" : "green"}>

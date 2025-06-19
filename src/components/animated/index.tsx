@@ -6,4 +6,6 @@ export * from "./vortex";
 export * from "./animated-content";
 export * from "./card-swap";
 export * from "./fade-content";
+export * from "./glitch-text";
+export * from "./profile-card";
 export { default as BeamsBg } from "./beams-bg";

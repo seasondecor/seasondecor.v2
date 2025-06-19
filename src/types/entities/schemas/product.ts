@@ -1,13 +1,13 @@
-import { Season, ProductStatus } from "./enums";
+import { Season } from "../enums";
 
-export interface Product {
+export interface ProductSchema {
   id: number;
   productName: string;
   quantity: number;
   rate: number;
   productPrice: number;
   totalSold: number;
-  status: ProductStatus;
+  status: string;
   productCategory: {
     id: number;
     categoryName: string;
