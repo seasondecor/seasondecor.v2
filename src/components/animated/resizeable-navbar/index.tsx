@@ -8,7 +8,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "motion/react";
-import Logo from "@/components/layout/logo";
+import { Logo } from "@/components/layout";
 import { Flex, Heading, Box, Link as ChakraLink } from "@chakra-ui/react";
 import { useColorModeValue } from "@/components/ui/color-mode";
 import Link from "next/link";
@@ -85,7 +85,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       position="sticky"
       insetX={0}
       top={0}
-      zIndex="banner"
+      zIndex="sticky"
       w="full"
       className={className}
     >

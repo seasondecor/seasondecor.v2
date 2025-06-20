@@ -8,44 +8,33 @@ import {
   HStack,
   VStack,
   Button,
-  Image,
-  Heading,
-  Badge,
   Tabs,
   Grid,
   GridItem,
   Box,
-  Text,
-  Link,
   Skeleton,
   SkeletonText,
   SkeletonCircle,
-  Status,
   Blockquote,
 } from "@chakra-ui/react";
-import { Tooltip } from "@/components/ui/tooltip";
+import { notFound } from "next/navigation";
 
-import {
-  IconArrowLeft,
-  IconMapPin,
-  IconBrandGithub,
-  IconBrandX,
-  IconCircleCheck,
-  IconPhone,
-  IconArticle,
-  IconHammer,
-  IconInfoCircle,
-} from "@tabler/icons-react";
+import { IconArrowLeft } from "@tabler/icons-react";
 import { FadeContent } from "@/components/animated";
 import { useGetProviderBySlug } from "@/queries";
 import DOMPurify from "dompurify";
+import { ProfileSidebar } from "../_components";
 
 export default function ProviderProfilePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const slug = searchParams.get("slug") || "";
 
-  const { data: provider, isFetching } = useGetProviderBySlug(slug);
+  const { data: provider, isFetching, isError } = useGetProviderBySlug(slug);
+
+  if (!isFetching && (isError || !provider)) {
+    notFound();
+  }
 
   if (isFetching) {
     return (
@@ -149,100 +138,14 @@ export default function ProviderProfilePage() {
         >
           {/* Left Sidebar */}
           <GridItem>
-            <VStack align="start" gap={6}>
-              <Image
-                src={provider?.avatar}
-                boxSize={{ base: "120px", md: "150px" }}
-                borderRadius="full"
-                fit="cover"
-                alt="Profile"
+            {provider && (
+              <ProfileSidebar
+                provider={provider}
+                followed={false}
+                onFollowClick={() => {}}
+                onUnFollowClick={() => {}}
               />
-
-              <VStack align="start" gap={4} width="full">
-                <Heading size="2xl" fontWeight="semibold">
-                  {provider?.businessName}
-                </Heading>
-                <HStack>
-                  <Badge variant="subtle" size="lg" colorPalette="green">
-                    <IconCircleCheck size={14} />
-                    Provider
-                  </Badge>
-                  <Badge variant="surface" size="lg">
-                    <IconHammer size={14} />
-                    {provider?.skillName}
-                  </Badge>
-                </HStack>
-
-                <VStack align="start" gap={3} mt={2}>
-                  <HStack fontSize="sm" color="whiteAlpha.800">
-                    <IconMapPin size={18} />
-                    <Text>{provider?.address}</Text>
-                  </HStack>
-                  <HStack fontSize="sm" color="whiteAlpha.800">
-                    <IconPhone size={18} />
-                    <Text>{provider?.phone}</Text>
-                  </HStack>
-                  <HStack fontSize="sm" color="whiteAlpha.800">
-                    <IconArticle size={18} />
-                    <Link href="https://zenorocha.com">zenorocha.com</Link>
-                  </HStack>
-                  <HStack>
-                    <Status.Root
-                      colorPalette={provider?.providerStatus ? "green" : "red"}
-                    >
-                      <Status.Indicator />
-                      {provider?.providerStatus
-                        ? "Currently active"
-                        : "Busy right now"}
-                    </Status.Root>
-                    <Tooltip
-                      showArrow
-                      positioning={{ placement: "right-end" }}
-                      content={
-                        provider?.providerStatus
-                          ? "You can contact and schedule at the moment"
-                          : "The provider is currently busy, you can contact later!"
-                      }
-                    >
-                      <IconInfoCircle size={20} />
-                    </Tooltip>
-                  </HStack>
-                </VStack>
-
-                <HStack gap={4} mt={2}>
-                  <Link href="https://github.com/zenorocha">
-                    <IconBrandGithub size={20} />
-                  </Link>
-                  <Link href="https://twitter.com/zenorocha">
-                    <IconBrandX size={20} />
-                  </Link>
-                </HStack>
-              </VStack>
-
-              <Box mt={8}>
-                <Heading size="md" mb={4}>
-                  Interests
-                </Heading>
-                <HStack gap={3}>
-                  <Box
-                    p={3}
-                    bg="whiteAlpha.100"
-                    borderRadius="full"
-                    _hover={{ bg: "whiteAlpha.200" }}
-                  >
-                    🎧
-                  </Box>
-                  <Box
-                    p={3}
-                    bg="whiteAlpha.100"
-                    borderRadius="full"
-                    _hover={{ bg: "whiteAlpha.200" }}
-                  >
-                    ☕
-                  </Box>
-                </HStack>
-              </Box>
-            </VStack>
+            )}
           </GridItem>
 
           {/* Right Content */}

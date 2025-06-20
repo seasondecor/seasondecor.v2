@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
-import Header from "@/components/layout/header";
-import Footer from "@/components/layout/footer";
+import { Header } from "@/components";
+import { Footer } from "@/components";
 import { Box } from "@chakra-ui/react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
 });
 
@@ -28,28 +23,20 @@ export const metadata: Metadata = {
 export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props;
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`!scroll-smooth ${geistSans.variable} ${geistMono.variable}`}
-    >
-      <body
-        className={`___next`}
-      >
+    <html lang="en" suppressHydrationWarning className={bricolage.variable}>
+      <body className={`___next`}>
         <Provider>
-          <Header />
           <Box
-            position="relative"
             bgImage="url('/static/profile-bg-desktop.png')"
             bgSize="cover"
             bgPos="center"
             bgRepeat="no-repeat"
             as="main"
-            overflowX="hidden"
-            minH="100vh"  
-            mt="-80px"
-            pt={20}
+            overflow="unset"
+            minH="100vh"
           >
+            <Header />
+
             {children}
             <Footer />
           </Box>

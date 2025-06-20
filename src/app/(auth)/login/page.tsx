@@ -17,7 +17,7 @@ import {
   Alert,
   CloseButton,
 } from "@chakra-ui/react";
-import { PasswordInput } from "@/components/ui/password-input";
+import { PasswordInput } from "@/components";
 import {
   IconChevronLeft,
   IconArrowNarrowRight,
@@ -25,7 +25,7 @@ import {
   IconLock,
   IconBrandGoogleFilled,
 } from "@tabler/icons-react";
-import Logo from "@/components/layout/logo";
+import { Logo } from "@/components";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

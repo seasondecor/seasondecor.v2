@@ -9,7 +9,7 @@ interface LogoProps {
   insideStyle?: string;
 }
 
-const Logo = ({ outsideStyle, insideStyle }: LogoProps) => {
+export const Logo = ({ outsideStyle, insideStyle }: LogoProps) => {
   return (
     <Flex className={clsx("hidden", outsideStyle)}>
       <Stack className={clsx("", insideStyle)}>
@@ -30,4 +30,4 @@ const Logo = ({ outsideStyle, insideStyle }: LogoProps) => {
   );
 };
 
-export default Logo;
+

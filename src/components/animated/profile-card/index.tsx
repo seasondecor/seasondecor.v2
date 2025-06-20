@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import "../../../app/globals.css";
 import { Image } from "@chakra-ui/react";

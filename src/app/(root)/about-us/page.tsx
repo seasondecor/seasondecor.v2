@@ -113,7 +113,7 @@ export default function GuestProfilePage() {
 
           {/*TeamSection */}
           <Box as="section" mt={40}>
-            <VStack gap={12} textAlign="center">
+            <VStack gap={6} textAlign="center">
               <Heading
                 as="h2"
                 size="4xl"
