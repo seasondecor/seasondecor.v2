@@ -19,7 +19,7 @@ import {
   createListCollection,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { PasswordInput } from "@/components/ui/password-input";
+
 import {
   IconChevronLeft,
   IconMail,
@@ -27,11 +27,10 @@ import {
   IconBrandGoogleFilled,
   IconLockCheck,
 } from "@tabler/icons-react";
-import Logo from "@/components/layout/logo";
+import { Logo, DatePicker, PasswordInput } from "@/components";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupFormSchema, type SignupFormValues } from "@/schema/auth-schema";
-import { DatePicker } from "@/components/ui/date-picker";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -176,7 +175,12 @@ export default function SignupPage() {
             <Field.ErrorText>{errors.confirmPassword?.message}</Field.ErrorText>
           </Field.Root>
           <HStack gap={4} w="full">
-            <Select.Root required collection={genders} size="sm" variant="subtle">
+            <Select.Root
+              required
+              collection={genders}
+              size="sm"
+              variant="subtle"
+            >
               <Select.HiddenSelect />
               <Select.Label>Select gender</Select.Label>
               <Select.Control>

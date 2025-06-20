@@ -111,7 +111,7 @@ const handleValidationErrors = (errors: string[] | Record<string, string | strin
 const handleUnauthorized = async (): Promise<void> => {
   toaster.warning({ title: "Please login to continue" });
   await signOut({ redirect: false });
-  window.location.href = "/authen/login";
+  window.location.href = "/login";
 };
 
 // API request functions

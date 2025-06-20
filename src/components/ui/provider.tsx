@@ -11,7 +11,6 @@ import { SessionProvider } from "next-auth/react";
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 2,
       refetchOnWindowFocus: false,
     },
   },

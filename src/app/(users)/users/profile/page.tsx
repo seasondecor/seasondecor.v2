@@ -17,9 +17,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { HashLoader } from "react-spinners";
-import { AboutTab } from "./_components/about-tab";
-import { ConnectionTab } from "./_components/connection-tab";
-import { BookingTab } from "./_components/booking-tab";
+import { AboutTab, BookingTab, ConnectionTab } from "./_components";
 import { useSession } from "next-auth/react";
 import { useGetAccountById, useGetFollowing } from "@/queries";
 

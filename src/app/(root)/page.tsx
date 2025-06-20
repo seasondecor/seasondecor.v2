@@ -27,6 +27,7 @@ import {
   IconPhoneRinging,
   IconHeartbeat,
   IconWorldSearch,
+  IconChevronRight,
 } from "@tabler/icons-react";
 import { CountUp } from "@/components/animated";
 import dynamic from "next/dynamic";
@@ -41,7 +42,7 @@ export default function Home() {
   );
   return (
     <>
-      <Box position="relative" minH="100vh" mt="-68px">
+      <Box position="relative" minH="100vh" mt="-80px">
         <Box
           position="absolute"
           inset={0}
@@ -83,15 +84,9 @@ export default function Home() {
             >
               {/* Left side content */}
               <Box w={{ base: "full", lg: "50%" }}>
-                <Badge
-                  px={3}
-                  py={1}
-                  borderRadius="full"
-                  bg="purple.500"
-                  fontSize="sm"
-                  mb={8}
-                >
+                <Badge size="lg" borderRadius="full" variant="outline" mb={8}>
                   ✨ Introducing Our Platform
+                  <IconChevronRight size={18} />
                 </Badge>
 
                 <Heading
@@ -115,20 +110,20 @@ export default function Home() {
 
                 <VStack gap={4} align="stretch" mb={8}>
                   <HStack gap={3} direction="row">
-                    <Icon size="lg" color="purple.700">
+                    <Icon size="lg">
                       <IconListSearch />
                     </Icon>
 
                     <Text>Find your perfect decoration style</Text>
                   </HStack>
                   <HStack gap={3}>
-                    <Icon size="lg" color="purple.700">
+                    <Icon size="lg">
                       <IconAdjustments />
                     </Icon>
                     <Text>Free to customize your experience</Text>
                   </HStack>
                   <HStack gap={3}>
-                    <Icon size="lg" color="purple.700">
+                    <Icon size="lg">
                       <IconCalendarClock />
                     </Icon>
                     <Text>Book with confidence</Text>
@@ -140,7 +135,6 @@ export default function Home() {
                   p={{ base: 3, md: 6 }}
                   borderRadius={{ base: "lg", md: "xl" }}
                   border="1px solid"
-                  borderColor="purple.500"
                   style={{ borderColor: "rgba(159, 122, 234, 0.2)" }}
                   mb={{ base: 4, md: 8 }}
                   bg={{ base: "gray.950", md: "rgba(255, 255, 255, 0.1)" }}

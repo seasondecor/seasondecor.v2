@@ -1,3 +1,5 @@
+"use client"
+
 import { useRef, useEffect, useState, ReactNode } from "react";
 
 interface FadeContentProps {

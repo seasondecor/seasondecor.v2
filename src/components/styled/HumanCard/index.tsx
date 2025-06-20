@@ -1,34 +1,32 @@
 "use client";
 
+import { FC } from "react";
 import {
-  Container,
   Heading,
   Text,
-  Highlight,
-  Button,
   Image,
-  Box,
-  SimpleGrid,
   Link as ChakraLink,
   VStack,
-  For,
-  Skeleton,
-  SkeletonCircle,
 } from "@chakra-ui/react";
-import { IconChevronRight } from "@tabler/icons-react";
 import Link from "next/link";
+import slugify from "slugify";
+import { ProviderSchema } from "@/types";
 
+export interface HumanCardProps {
+  human: ProviderSchema;
+  followed?: boolean;
+  onFollowClick?: () => void | Promise<void>;
+  onUnFollowClick?: () => void | Promise<void>;
+}
 
-
-export const HumanCard = () => {
+export const HumanCard: FC<HumanCardProps> = ({ human }: HumanCardProps) => {
   return (
     <ChakraLink
       as={Link}
-      href={`/humans/${slugify(item.businessName, {
+      href={`/humans/${slugify(human.businessName, {
         lower: true,
         strict: true,
-      })}?slug=${encodeURIComponent(item.slug)}`}
-      key={item.id ?? i}
+      })}?slug=${encodeURIComponent(human.slug)}`}
       _hover={{ textDecoration: "none" }}
       _focus={{ outline: "none" }}
     >
@@ -51,15 +49,15 @@ export const HumanCard = () => {
             md: "130px",
             xl: "142px",
           }}
-          src={item.avatar ?? "https://bit.ly/dan-abramov"}
-          alt={item.businessName ?? "Human"}
+          src={human.avatar ?? "https://bit.ly/dan-abramov"}
+          alt={human.businessName ?? "Human"}
         />
         <VStack gap={1}>
           <Heading as="h2" size="sm">
-            {item.businessName}
+            {human.businessName}
           </Heading>
           <Text fontSize="sm" color="gray.500" mx="auto" maxW="80%">
-            {item.address}
+            {human.address}
           </Text>
         </VStack>
       </VStack>

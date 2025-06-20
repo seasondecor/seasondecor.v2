@@ -47,7 +47,7 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { useGetAccountById } from "@/queries";
 
-export default function Header() {
+export const Header = () => {
   const { data: session, status } = useSession();
 
   const accountId = session?.accountId;
@@ -60,12 +60,17 @@ export default function Header() {
   const router = useRouter();
   const navItems = [
     {
+      name: "About",
+      link: "/about-us",
+    },
+    {
       name: "Humans",
       link: "/humans",
     },
+
     {
-      name: "About Us",
-      link: "/about-us",
+      name: "Services",
+      link: "/services",
     },
     {
       name: "Shop",
@@ -442,4 +447,4 @@ export default function Header() {
       </Navbar>
     </>
   );
-}
+};

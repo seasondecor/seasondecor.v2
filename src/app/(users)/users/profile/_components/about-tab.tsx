@@ -24,12 +24,13 @@ import {
   IconGenderGenderfluid,
   IconShield,
   IconCake,
+  IconHash,
 } from "@tabler/icons-react";
-import { AccountProfile } from "@/types";
+import { UserSchema } from "@/types";
 import { Tooltip } from "@/components/ui/tooltip";
 
 interface AboutTabProps {
-  account: AccountProfile;
+  account: UserSchema;
 }
 
 export const AboutTab: React.FC<AboutTabProps> = ({ account }) => {
@@ -124,7 +125,10 @@ export const AboutTab: React.FC<AboutTabProps> = ({ account }) => {
             </Text>
           </HStack>
           <Tooltip showArrow content="This is your slug">
-            <Badge variant="surface">{account.slug}</Badge>
+            <Badge variant="surface">
+              <IconHash size={16} />
+              {account.slug}
+            </Badge>
           </Tooltip>
         </HStack>
 

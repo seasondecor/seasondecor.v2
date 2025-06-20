@@ -16,6 +16,12 @@ const config = defineConfig({
       lg: "960px",
       xl: "1200px",
     },
+    tokens: {
+      fonts: {
+        heading: { value: "var(--font-bricolage)" },
+        body: { value: "var(--font-bricolage)" },
+      },
+    },
     keyframes: {
       spin: {
         from: { transform: "rotate(0deg)" },

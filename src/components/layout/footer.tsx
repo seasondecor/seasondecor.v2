@@ -22,7 +22,7 @@ import {
   IconBrandYoutube,
 } from "@tabler/icons-react";
 
-export default function Footer() {
+export const Footer = () => {
   const pathname = usePathname();
 
   if (pathname === "/login" || pathname === "/signup") {

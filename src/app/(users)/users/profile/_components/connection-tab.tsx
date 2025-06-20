@@ -10,6 +10,7 @@ import {
   Image,
   Button,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 interface ConnectionTabProps {
   following: unknown[];
@@ -27,11 +28,18 @@ export const ConnectionTab: React.FC<ConnectionTabProps> = ({ following }) => {
             />
           </EmptyState.Indicator>
           <VStack textAlign="center" gap={5}>
-            <EmptyState.Title>You don&apos;t follow any providers so far</EmptyState.Title>
+            <EmptyState.Title>
+              You don&apos;t follow any providers so far
+            </EmptyState.Title>
             <EmptyState.Description>
-              When you start to follow someone ,you’ll find the profiles of providers here
+              When you start to follow someone ,you’ll find the profiles of
+              providers here
             </EmptyState.Description>
-            <Button variant="surface" rounded="full">Explore providers</Button>
+            <Link href="/humans">
+              <Button variant="surface" rounded="full">
+                Explore providers
+              </Button>
+            </Link>
           </VStack>
         </EmptyState.Content>
       </EmptyState.Root>

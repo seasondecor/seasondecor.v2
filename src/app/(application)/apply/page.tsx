@@ -24,7 +24,7 @@ import { IconUpload, IconPhotoUp } from "@tabler/icons-react";
 
 export default function ApplyPage() {
   return (
-    <Container maxW="7xl" py={{ base: 12, md: 24 }} px={{ base: 4, md: 6 }}>
+    <Container maxW="7xl" py={20}>
       <Flex direction={{ base: "column", md: "row" }} gap={{ base: 8, md: 48 }}>
         <VStack align="start" gap={4} flex={1}>
           <Heading

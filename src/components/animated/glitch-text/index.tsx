@@ -1,3 +1,5 @@
+"use client"
+
 import { FC, CSSProperties } from "react";
 import "../../../app/globals.css";
 
