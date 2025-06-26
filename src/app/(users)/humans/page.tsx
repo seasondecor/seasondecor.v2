@@ -72,7 +72,7 @@ export default function HumanPage() {
         Add yourself to the list <IconChevronRight />
       </Button>
 
-      <Box as="ul" mx="auto" pt={32}>
+      <Box as="ul" mx="auto" pt={30}>
         <SimpleGrid
           columns={{ base: 1, sm: 2, md: 3, lg: 4, xl: 5 }}
           gap={{ base: 8, md: 12, lg: 16, xl: 20 }}

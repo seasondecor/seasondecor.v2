@@ -73,3 +73,53 @@ export function useGetListProduct(
     staleTime: 30000,
   });
 }
+
+export function useGetProductByProvider(
+  slug: string,
+  paginationParams: Partial<ProductPaginationParamsSchema> = {}
+) {
+  const params: ProductPaginationParamsSchema = {
+    ...defaultPagination,
+    ...paginationParams,
+  };
+
+  return useQuery({
+    queryKey: ["product_list_by_provider", params],
+    queryFn: async () => {
+      nProgress.start();
+      try {
+         let url = `/${SUB_URL}/getPaginatedListByProvider?Slug=${slug}`;
+        url += `&PageIndex=${params.pageIndex}`;
+        url += `&PageSize=${params.pageSize}`;
+
+        if (params.productName)
+          url += `&ProductName=${encodeURIComponent(params.productName)}`;
+        if (params.minPrice) url += `&MinPrice=${params.minPrice}`;
+        if (params.maxPrice) url += `&MaxPrice=${params.maxPrice}`;
+        if (params.status)
+          url += `&Status=${encodeURIComponent(params.status)}`;
+        if (params.sortBy)
+          url += `&SortBy=${encodeURIComponent(params.sortBy)}`;
+        if (params.descending !== undefined)
+          url += `&Descending=${params.descending}`;
+
+        const response = await BaseRequest.Get<
+          PaginatedApiResponseSchema<ProductSchema>
+        >(url, false);
+
+        if (!response.success) {
+          throw new Error(response.message || "Failed to fetch products");
+        }
+
+        return {
+          items: response.data.data,
+          totalCount: response.data.totalCount,
+          totalPages: Math.ceil(response.data.totalCount / params.pageSize),
+        };
+      } finally {
+        nProgress.done();
+      }
+    },
+    staleTime: 30000,
+  });
+}

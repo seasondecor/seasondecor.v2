@@ -1,34 +1,25 @@
 "use client";
 
 import { FC } from "react";
-import {
-  Heading,
-  Text,
-  Image,
-  Link as ChakraLink,
-  VStack,
-} from "@chakra-ui/react";
+import { Heading, Text, Image, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import slugify from "slugify";
 import { ProviderSchema } from "@/types";
 
-export interface HumanCardProps {
+interface HumanCardProps {
   human: ProviderSchema;
   followed?: boolean;
   onFollowClick?: () => void | Promise<void>;
   onUnFollowClick?: () => void | Promise<void>;
 }
 
-export const HumanCard: FC<HumanCardProps> = ({ human }: HumanCardProps) => {
+export const HumanCard: FC<HumanCardProps> = ({ human }) => {
   return (
-    <ChakraLink
-      as={Link}
+    <Link
       href={`/humans/${slugify(human.businessName, {
         lower: true,
         strict: true,
       })}?slug=${encodeURIComponent(human.slug)}`}
-      _hover={{ textDecoration: "none" }}
-      _focus={{ outline: "none" }}
     >
       <VStack
         gap={4}
@@ -61,6 +52,6 @@ export const HumanCard: FC<HumanCardProps> = ({ human }: HumanCardProps) => {
           </Text>
         </VStack>
       </VStack>
-    </ChakraLink>
+    </Link>
   );
 };

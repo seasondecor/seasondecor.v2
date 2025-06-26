@@ -21,9 +21,13 @@ import { notFound } from "next/navigation";
 
 import { IconArrowLeft } from "@tabler/icons-react";
 import { FadeContent } from "@/components/animated";
-import { useGetProviderBySlug } from "@/queries";
 import DOMPurify from "dompurify";
-import { ProfileSidebar } from "../_components";
+import { ProfileSidebar, SellTab, ServiceTab } from "../_components";
+import {
+  useGetProviderBySlug,
+  useGetProductByProvider,
+  useGetDecorServiceOfProvider,
+} from "@/queries";
 
 export default function ProviderProfilePage() {
   const router = useRouter();
@@ -31,6 +35,12 @@ export default function ProviderProfilePage() {
   const slug = searchParams.get("slug") || "";
 
   const { data: provider, isFetching, isError } = useGetProviderBySlug(slug);
+  const providerId = provider?.id;
+  const { data: products, isFetching: isProductFetching } =
+    useGetProductByProvider(slug);
+
+  const { data: decorService, isFetching: isDecorServiceFetching } =
+    useGetDecorServiceOfProvider(providerId ? { providerId } : {});
 
   if (!isFetching && (isError || !provider)) {
     notFound();
@@ -153,22 +163,15 @@ export default function ProviderProfilePage() {
             <Tabs.Root
               defaultValue="about"
               fitted
-              variant="subtle"
+              variant="plain"
               colorPalette="cyan"
             >
               <Tabs.List>
-                <Tabs.Trigger value="about" px={5} py={3} rounded="full">
-                  About
-                </Tabs.Trigger>
-                <Tabs.Trigger value="service" px={5} py={3} rounded="full">
-                  Service
-                </Tabs.Trigger>
-                <Tabs.Trigger value="sell" px={5} py={3} rounded="full">
-                  Sell
-                </Tabs.Trigger>
-                <Tabs.Trigger value="handbook" px={5} py={3} rounded="full">
-                  Handbook
-                </Tabs.Trigger>
+                <Tabs.Trigger value="about">About</Tabs.Trigger>
+                <Tabs.Trigger value="service">Service</Tabs.Trigger>
+                <Tabs.Trigger value="sell">Sell</Tabs.Trigger>
+                <Tabs.Trigger value="handbook">Handbook</Tabs.Trigger>
+                <Tabs.Indicator rounded="3xl" shadow="xl" />
               </Tabs.List>
 
               <Tabs.Content value="about" pt={8}>
@@ -185,10 +188,18 @@ export default function ProviderProfilePage() {
                 </Blockquote.Root>
               </Tabs.Content>
               <Tabs.Content value="service" pt={8}>
-                ads
+                <ServiceTab
+                  decorService={decorService?.items || []}
+                  isFetching={isDecorServiceFetching}
+                  totalCount={decorService?.totalCount || 0}
+                />
               </Tabs.Content>
               <Tabs.Content value="sell" pt={8}>
-                ads
+                <SellTab
+                  product={products?.items || []}
+                  isFetching={isProductFetching}
+                  totalCount={products?.totalCount || 0}
+                />
               </Tabs.Content>
               <Tabs.Content value="handbook" pt={8}>
                 dsa

@@ -4,6 +4,10 @@
   display: none !important;
 }
 
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
 :root {
   --pointer-x: 50%;
   --pointer-y: 50%;
