@@ -13,6 +13,7 @@ import {
   Status,
   ButtonGroup,
   Separator,
+  FormatNumber,
 } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/tooltip";
 
@@ -28,11 +29,12 @@ import {
   IconUserPlus,
   IconUserMinus,
   IconMessageCircle,
+  IconUsers,
 } from "@tabler/icons-react";
 import { ProviderSchema } from "@/types";
 import { FC } from "react";
 
-export interface ProfileSidebarProps {
+interface ProfileSidebarProps {
   provider: ProviderSchema;
   followed?: boolean;
   onFollowClick?: () => void | Promise<void>;
@@ -91,6 +93,17 @@ export const ProfileSidebar: FC<ProfileSidebarProps> = ({
         </HStack>
 
         <VStack align="start" gap={3} mt={2}>
+          <HStack fontSize="sm" color="whiteAlpha.800">
+            <IconUsers size={18} />
+            <Text>
+              <FormatNumber
+                value={provider.followersCount}
+                notation="compact"
+                compactDisplay="short"
+              />
+            </Text>
+            Followers
+          </HStack>
           <HStack fontSize="sm" color="whiteAlpha.800">
             <IconMapPin size={18} />
             <Text>{provider.address}</Text>

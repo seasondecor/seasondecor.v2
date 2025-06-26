@@ -99,7 +99,7 @@ export default function ShopPage() {
             ) : (
               <For each={productsData?.items ?? []}>
                 {(product: ProductSchema) => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard key={product.id} product={product}  />
                 )}
               </For>
             )}

@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { DayPicker } from "react-day-picker";
-import { Box, Button, Popover, Portal } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { IconCalendarWeekFilled } from "@tabler/icons-react";
-import "react-day-picker/style.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export type DatePickerProps = {
   value?: Date;
@@ -14,56 +14,41 @@ export type DatePickerProps = {
   placeholder?: string;
 };
 
-export const DatePicker = ({
+export const CustomDatePicker = ({
   value,
   onChange,
-  showOutsideDays = true,
   disabled = false,
   placeholder = "Pick a date",
 }: DatePickerProps) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
   return (
-    <Popover.Root open={isOpen} positioning={{ placement: "bottom-start" }}>
-      <Popover.Trigger asChild width="100%">
-        <Button
-          variant="subtle"
-          width="100%"
-          justifyContent="start"
-          textAlign="left"
-          fontWeight="normal"
-          onClick={() => setIsOpen(!isOpen)}
-          disabled={disabled}
-        >
-          <IconCalendarWeekFilled />
-          {value ? value.toLocaleDateString() : placeholder}
-        </Button>
-      </Popover.Trigger>
-      <Portal>
-        <Popover.Positioner>
-          <Popover.Content>
-            <Popover.Arrow />
-            <Popover.Body>
-              <Box>
-                <DayPicker
-                  mode="single"
-                  showOutsideDays={showOutsideDays}
-                  selected={value}
-                  onSelect={(date: Date | undefined) => {
-                    if (date && onChange) {
-                      onChange(date);
-                      setIsOpen(false);
-                    }
-                  }}
-                  disabled={disabled}
-                />
-              </Box>
-            </Popover.Body>
-          </Popover.Content>
-        </Popover.Positioner>
-      </Portal>
-    </Popover.Root>
+    <>
+      <DatePicker
+        customInput={
+          <Button
+            variant="subtle"
+            width="full"
+            size="sm"
+            justifyContent="start"
+            textAlign="left"
+            disabled={disabled}
+          >
+            <IconCalendarWeekFilled />
+            {value ? value.toLocaleDateString() : placeholder}
+          </Button>
+        }
+        onChange={(date: Date | null) => {
+          if (date instanceof Date && onChange) {
+            onChange(date);
+          }
+        }}
+        selected={value || null}
+        disabled={disabled}
+        dateFormat="y-MM-dd"
+        calendarClassName="chakra-datepicker"
+        showYearDropdown
+        showMonthDropdown
+        dropdownMode="select"
+      />
+    </>
   );
 };
-
-DatePicker.displayName = "DatePicker";

@@ -24,17 +24,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props;
   return (
     <html lang="en" suppressHydrationWarning className={bricolage.variable}>
-      <body className={`___next`}>
+      <body id="__next">
         <Provider>
-          <Box
-            bgImage="url('/static/profile-bg-desktop.png')"
-            bgSize="cover"
-            bgPos="center"
-            bgRepeat="no-repeat"
-            as="main"
-            overflow="unset"
-            minH="100vh"
-          >
+          <Box as="main" overflow="unset" minH="100vh">
             <Header />
 
             {children}

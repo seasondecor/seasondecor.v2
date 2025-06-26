@@ -8,6 +8,7 @@ import {
   Button,
   VStack,
   HStack,
+  Stack,
   Heading,
   Text,
   Field,
@@ -27,7 +28,7 @@ import {
   IconBrandGoogleFilled,
   IconLockCheck,
 } from "@tabler/icons-react";
-import { Logo, DatePicker, PasswordInput } from "@/components";
+import { Logo, CustomDatePicker, PasswordInput } from "@/components";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupFormSchema, type SignupFormValues } from "@/schema/auth-schema";
@@ -174,7 +175,7 @@ export default function SignupPage() {
 
             <Field.ErrorText>{errors.confirmPassword?.message}</Field.ErrorText>
           </Field.Root>
-          <HStack gap={4} w="full">
+          <Stack direction={{sm: "column", md: "row"}} gap={4} w="full">
             <Select.Root
               required
               collection={genders}
@@ -206,14 +207,14 @@ export default function SignupPage() {
             </Select.Root>
             <Field.Root invalid={!!errors.dateOfBirth}>
               <Field.Label>Date of birth</Field.Label>
-              <DatePicker
+              <CustomDatePicker
                 value={dateOfBirth}
                 onChange={setDateOfBirth}
                 placeholder="Select date of birth"
               />
               <Field.ErrorText>{errors.dateOfBirth?.message}</Field.ErrorText>
             </Field.Root>
-          </HStack>
+          </Stack>
 
           <Button
             type="submit"
