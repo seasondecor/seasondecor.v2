@@ -16,10 +16,10 @@ interface HumanCardProps {
 export const HumanCard: FC<HumanCardProps> = ({ human }) => {
   return (
     <Link
-      href={`/humans/${slugify(human.businessName, {
+      href={`/humans/${slugify(human.slug, {
         lower: true,
         strict: true,
-      })}?slug=${encodeURIComponent(human.slug)}`}
+      })}`}
     >
       <VStack
         gap={4}

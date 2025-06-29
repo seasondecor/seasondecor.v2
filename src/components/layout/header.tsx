@@ -53,7 +53,6 @@ export const Header = () => {
   const accountId = session?.accountId;
 
   const { data: account, isLoading } = useGetAccountById(accountId);
-
   //console.log("Session data:", session);
   //console.log("Session status:", status);
   const pathname = usePathname();

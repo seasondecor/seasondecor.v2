@@ -11,9 +11,10 @@ import {
   Button,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { ProviderSchema } from "@/types";
 
 interface ConnectionTabProps {
-  following: unknown[];
+  following: ProviderSchema[];
 }
 
 export const ConnectionTab: React.FC<ConnectionTabProps> = ({ following }) => {

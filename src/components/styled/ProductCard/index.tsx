@@ -14,7 +14,7 @@ import { ProductSchema } from "@/types";
 import { GlareHover } from "@/components/animated";
 import { IconStar } from "@tabler/icons-react";
 import Link from "next/link";
-import slugify from "slugify";
+import { createSlug } from "@/utils";
 
 interface ProductCardProps {
   product: ProductSchema;
@@ -23,10 +23,7 @@ interface ProductCardProps {
 export const ProductCard: FC<ProductCardProps> = ({ product }) => {
   return (
     <Link
-      href={`/products/${slugify(product.productName, {
-        lower: true,
-        strict: true,
-      })}`}
+    href={`/products/${createSlug(product.productName, product.id)}`}
     >
       <GlareHover
         key={product.id}
